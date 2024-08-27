@@ -2,7 +2,6 @@ import routes from "./routes/index"
 
 const express = require('express');
 // const token=require('jsonwebtoken')
-
 const app = express();
 const port=8080;
 app.use(express.json());

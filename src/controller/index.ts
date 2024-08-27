@@ -1,5 +1,6 @@
 
 import db from "../connection"
+import { accessSecretToken } from "../helper";
 const jwt=require('jsonwebtoken')
 const getUsers = async (req: Request, res: Response) => {
     const query = "SELECT * FROM UserEntities";
@@ -63,7 +64,7 @@ const loginUser=async(req:any,res:any)=>{
             const [rows]:any = await db.query(query);
             console.log(rows)
             if(rows?.length>0){
-        const token:string = jwt.sign({ userId:rows.id }, 'your-secret-key', {
+        const token:string = jwt.sign({ email:rows[0].email }, accessSecretToken, {
             expiresIn: '1h',
             });
           return res.json({token:token})
